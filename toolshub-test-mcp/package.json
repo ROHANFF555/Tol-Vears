@@ -1,0 +1,29 @@
+{
+  "name": "toolshub-test-mcp",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "MCP server that lets Claude test the live ToolsHub site by driving a real headless Chromium browser.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "verify": "node scripts/verify-all.mjs",
+    "fixtures": "node scripts/make-fixtures.mjs",
+    "test": "node --test test/*.test.mjs",
+    "serve-site": "node scripts/static-server.mjs",
+    "verify:errors": "node scripts/verify-errors.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "express": "^5.2.1",
+    "pdf-lib": "^1.17.1",
+    "playwright": "^1.63.0"
+  },
+  "devDependencies": {
+    "jpeg-js": "^0.4.4"
+  }
+}
