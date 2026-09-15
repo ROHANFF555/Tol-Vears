@@ -1,0 +1,51 @@
+# Render blueprint — https://render.com/docs/blueprint-spec
+#
+# Deploying from the ToolsHub monorepo? Set the service's **Root Directory** to
+# `toolshub-test-mcp` in the Render dashboard (New → Blueprint, or the service's Settings),
+# so the build context is this folder and ./Dockerfile resolves.
+services:
+  - type: web
+    name: toolshub-test-mcp
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      # The site under test.
+      - key: TOOLSHUB_URL
+        value: https://tol-vears.onrender.com
+      - key: NODE_ENV
+        value: production
+      # Close Chromium after 5 idle minutes — the free tier only has 512 MB of RAM.
+      - key: BROWSER_IDLE_MS
+        value: '300000'
+      # Hard ceiling per tool call.
+      - key: TOOL_DEADLINE_MS
+        value: '60000'
+      # Per-step Playwright timeout (navigation, waiting for an element, …).
+      - key: NAV_TIMEOUT_MS
+        value: '15000'
+      - key: STEP_TIMEOUT_MS
+        value: '15000'
+
+# ---------------------------------------------------------------------------
+# Native Node alternative (no Docker). Uncomment the block below and delete the
+# docker service above if you would rather Render install Chromium at build time.
+#
+# services:
+#   - type: web
+#     name: toolshub-test-mcp
+#     runtime: node
+#     plan: free
+#     buildCommand: npm ci && npx playwright install --with-deps chromium
+#     startCommand: npm start
+#     healthCheckPath: /health
+#     envVars:
+#       - key: NODE_VERSION
+#         value: 22.22.3
+#       - key: TOOLSHUB_URL
+#         value: https://tol-vears.onrender.com
+#       - key: PLAYWRIGHT_BROWSERS_PATH
+#         value: /opt/render/project/src/.cache/ms-playwright
+# ---------------------------------------------------------------------------

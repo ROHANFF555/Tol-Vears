@@ -1,0 +1,12 @@
+# Dependencies
+node_modules/
+
+# Logs & temp output
+*.log
+npm-debug.log*
+test-results/
+screenshots/
+
+# Misc
+.DS_Store
+.vite
