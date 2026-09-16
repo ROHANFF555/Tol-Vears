@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import Icon from '../components/Icons.jsx';
 import { TOOLS, CATEGORIES } from '../data/tools.js';
@@ -53,7 +54,16 @@ export default function Home() {
   const hasFilters = query.trim() !== '' || category !== 'All';
 
   return (
-    <div className="mx-auto max-w-6xl px-4">
+    <>
+      <Helmet>
+        <title>{'ToolsHub – Free Online Tools: Image Compressor, PDF Merger, QR Generator & More'}</title>
+        <meta
+          name="description"
+          content="Free, fast, privacy-friendly browser tools: compress images, merge PDFs, generate QR codes and passwords, convert units. No signup, no uploads."
+        />
+      </Helmet>
+
+      <div className="mx-auto max-w-6xl px-4">
       {/* Hero + search */}
       <section className="py-14 sm:py-20 text-center">
         <span className="inline-flex items-center gap-1.5 rounded-full border border-indigo-200 dark:border-indigo-900 bg-indigo-50 dark:bg-indigo-950/50 px-3 py-1 text-xs font-medium text-indigo-700 dark:text-indigo-300">
@@ -192,6 +202,7 @@ export default function Home() {
           </div>
         ))}
       </section>
-    </div>
+      </div>
+    </>
   );
 }

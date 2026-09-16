@@ -105,6 +105,26 @@ export default function Layout({ children }) {
               A word counter, JSON formatter, color picker and more are on the way. Have a
               suggestion? We&apos;d love to hear it.
             </p>
+            <h4 className="mt-6 text-sm font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">
+              Site
+            </h4>
+            <ul className="mt-3 space-y-2">
+              {[
+                ['/about', 'About ToolsHub'],
+                ['/privacy', 'Privacy Policy'],
+                ['/terms', 'Terms of Use'],
+                ['/contact', 'Contact'],
+              ].map(([href, label]) => (
+                <li key={href}>
+                  <Link
+                    to={href}
+                    className="text-sm text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
         <div className="border-t border-slate-200 dark:border-slate-800 py-4 text-center text-xs text-slate-400 dark:text-slate-500">
