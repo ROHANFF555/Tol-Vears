@@ -1,18 +1,35 @@
-import { useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import Icon from './Icons.jsx';
 
-// Consistent page shell for every tool: back link, header, body, "How to use" + privacy notes.
+// Consistent page shell for every tool: metadata, back link, header, body, and privacy notes.
 export default function ToolShell({ tool, children }) {
-  useEffect(() => {
-    document.title = `${tool.name} — ToolsHub`;
-    return () => {
-      document.title = 'ToolsHub — Free Browser Tools';
-    };
-  }, [tool.name]);
+  const { seo } = tool;
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: tool.name,
+    applicationCategory: 'UtilitiesApplication',
+    operatingSystem: 'Any (runs in browser)',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    },
+    url: `https://tol-vears.onrender.com/tools/${tool.slug}`,
+    description: seo.description,
+  };
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-10 sm:py-12">
+    <>
+      <Helmet>
+        <title>{seo.title}</title>
+        <meta name="description" content={seo.description} />
+        <meta name="keywords" content={seo.keywords.join(', ')} />
+        <script type="application/ld+json">{JSON.stringify(structuredData)}</script>
+      </Helmet>
+
+      <div className="mx-auto max-w-4xl px-4 py-10 sm:py-12">
       <Link
         to="/"
         className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400"
@@ -32,6 +49,7 @@ export default function ToolShell({ tool, children }) {
           <p className="mt-1 text-slate-500 dark:text-slate-400">{tool.tagline}</p>
         </div>
       </div>
+      <p className="mt-4 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300">{seo.intro}</p>
 
       <div className="mt-8">{children}</div>
 
@@ -47,6 +65,7 @@ export default function ToolShell({ tool, children }) {
           <span>{tool.privacy}</span>
         </p>
       </section>
-    </div>
+      </div>
+    </>
   );
 }

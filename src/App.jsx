@@ -2,6 +2,10 @@ import { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout.jsx';
 import Home from './pages/Home.jsx';
+import Privacy from './pages/Privacy.jsx';
+import Terms from './pages/Terms.jsx';
+import About from './pages/About.jsx';
+import Contact from './pages/Contact.jsx';
 import Icon from './components/Icons.jsx';
 
 // Code-split every tool page: heavy libraries (pdf-lib, jszip, qrcode) only load
@@ -27,6 +31,10 @@ export default function App() {
       <Suspense fallback={<PageLoader />}>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/tools/image-compressor" element={<ImageCompressor />} />
           <Route path="/tools/pdf-merger" element={<PdfMerger />} />
           <Route path="/tools/qr-code-generator" element={<QrGenerator />} />

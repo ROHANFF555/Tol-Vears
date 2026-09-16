@@ -6,6 +6,21 @@ export const TOOLS = [
     tagline: 'Shrink JPG, PNG & WebP files without uploading anything.',
     description:
       'Compress JPG, PNG, WebP, GIF and BMP images locally in your browser. Adjust quality with a live before/after size preview and download individually or as a ZIP.',
+    seo: {
+      title: 'Free Image Compressor Online – Reduce Photo Size (JPG, PNG, WebP) | ToolsHub',
+      description:
+        'Compress JPG, PNG and WebP images online for free, right in your browser. No upload, no signup — reduce file size while keeping quality.',
+      keywords: [
+        'image compressor',
+        'photo compressor',
+        'reduce image size',
+        'compress jpg online',
+        'compress png online',
+        'image size reducer',
+      ],
+      intro:
+        'This image compressor and photo compressor helps you reduce image size in seconds. Compress JPG online or compress PNG online, then download smaller WebP files with this browser-based image size reducer.',
+    },
     category: 'Image',
     tags: ['image', 'photo', 'compress', 'compression', 'jpg', 'jpeg', 'png', 'webp', 'gif', 'bmp', 'optimize', 'file size', 'zip'],
     icon: 'image',
@@ -25,6 +40,14 @@ export const TOOLS = [
     tagline: 'Combine multiple PDFs into one, right in your browser.',
     description:
       'Merge PDF documents entirely in your browser. Reorder files by dragging, check per-file and total page counts, and download the combined PDF.',
+    seo: {
+      title: 'Free PDF Merger Online – Combine PDF Files | ToolsHub',
+      description:
+        'Merge multiple PDF files into one online, for free, entirely in your browser. Reorder pages before combining — no upload, no signup.',
+      keywords: ['pdf merger', 'merge pdf online', 'combine pdf files', 'join pdf', 'pdf combiner'],
+      intro:
+        'Use this PDF merger to merge PDF online, combine PDF files, or join PDF documents in the order you choose. It works as a fast PDF combiner without uploading anything.',
+    },
     category: 'PDF',
     tags: ['pdf', 'merge', 'merger', 'combine', 'join', 'documents', 'pages', 'concat'],
     icon: 'fileText',
@@ -44,6 +67,14 @@ export const TOOLS = [
     tagline: 'Turn any text or URL into a downloadable QR code.',
     description:
       'Generate QR codes from any text or URL, live as you type. Choose a size and download the PNG — no API calls, generated locally in your browser.',
+    seo: {
+      title: 'Free QR Code Generator Online – Create QR Codes Instantly | ToolsHub',
+      description:
+        'Generate a QR code from any text or link instantly, for free. Download as PNG in multiple sizes — works fully in your browser.',
+      keywords: ['qr code generator', 'create qr code', 'make qr code online', 'qr code maker', 'free qr generator'],
+      intro:
+        'Use this QR code generator to create QR code images from text or links. It is a simple make QR code online tool and free QR generator that works as a QR code maker in your browser.',
+    },
     category: 'Generator',
     tags: ['qr', 'qr code', 'code', 'generator', 'url', 'link', 'barcode', 'scan'],
     icon: 'qr',
@@ -63,6 +94,20 @@ export const TOOLS = [
     tagline: 'Create strong, random passwords with one click.',
     description:
       'Generate cryptographically secure passwords using your browser’s built-in random number generator. Pick length and character types, check the strength meter, and copy with one click.',
+    seo: {
+      title: 'Free Password Generator Online – Strong Random Passwords | ToolsHub',
+      description:
+        'Generate strong, random, secure passwords for free. Adjustable length and character types — nothing is ever stored or sent anywhere.',
+      keywords: [
+        'password generator',
+        'random password generator',
+        'strong password maker',
+        'secure password creator',
+        'generate password online',
+      ],
+      intro:
+        'This password generator is a random password generator, strong password maker, and secure password creator for anyone who wants to generate passwords online without storing them.',
+    },
     category: 'Generator',
     tags: ['password', 'generator', 'secure', 'security', 'random', 'strong', 'safety', 'entropy'],
     icon: 'key',
@@ -82,6 +127,20 @@ export const TOOLS = [
     tagline: 'Convert length, weight & temperature instantly.',
     description:
       'Convert between metric and imperial units as you type: length (mm to miles), weight (mg to tons) and temperature (°C, °F, K). Includes a swap button and exact conversion rates.',
+    seo: {
+      title: 'Free Unit Converter Online – Length, Weight & Temperature | ToolsHub',
+      description:
+        'Convert length, weight and temperature units instantly and for free. Simple, fast, and works right in your browser.',
+      keywords: [
+        'unit converter',
+        'length converter',
+        'weight converter',
+        'temperature converter',
+        'convert units online',
+      ],
+      intro:
+        'This unit converter works as a length converter, weight converter, and temperature converter, so you can convert units online instantly and for free.',
+    },
     category: 'Converter',
     tags: ['unit', 'units', 'converter', 'conversion', 'length', 'weight', 'temperature', 'metric', 'imperial', 'celsius', 'fahrenheit', 'kelvin', 'km', 'miles', 'kg', 'pounds'],
     icon: 'ruler',

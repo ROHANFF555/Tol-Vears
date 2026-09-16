@@ -4,6 +4,7 @@
 import { createServer } from 'vite';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom/server.js';
+import { HelmetProvider } from 'react-helmet-async';
 import React from 'react';
 
 // Minimal browser globals needed at render time (ThemeToggle reads document at init).
@@ -30,28 +31,41 @@ const vite = await createServer({
 });
 
 const pages = [
-  ['/', '/src/pages/Home.jsx', '/'],
-  ['/tools/image-compressor', '/src/pages/tools/ImageCompressor.jsx', '/tools/image-compressor'],
-  ['/tools/pdf-merger', '/src/pages/tools/PdfMerger.jsx', '/tools/pdf-merger'],
-  ['/tools/qr-code-generator', '/src/pages/tools/QrGenerator.jsx', '/tools/qr-code-generator'],
-  ['/tools/password-generator', '/src/pages/tools/PasswordGenerator.jsx', '/tools/password-generator'],
-  ['/tools/unit-converter', '/src/pages/tools/UnitConverter.jsx', '/tools/unit-converter'],
+  ['/', '/src/pages/Home.jsx', '/', 'ToolsHub – Free Online Tools: Image Compressor, PDF Merger, QR Generator & More'],
+  ['/tools/image-compressor', '/src/pages/tools/ImageCompressor.jsx', '/tools/image-compressor', 'Free Image Compressor Online – Reduce Photo Size (JPG, PNG, WebP) | ToolsHub'],
+  ['/tools/pdf-merger', '/src/pages/tools/PdfMerger.jsx', '/tools/pdf-merger', 'Free PDF Merger Online – Combine PDF Files | ToolsHub'],
+  ['/tools/qr-code-generator', '/src/pages/tools/QrGenerator.jsx', '/tools/qr-code-generator', 'Free QR Code Generator Online – Create QR Codes Instantly | ToolsHub'],
+  ['/tools/password-generator', '/src/pages/tools/PasswordGenerator.jsx', '/tools/password-generator', 'Free Password Generator Online – Strong Random Passwords | ToolsHub'],
+  ['/tools/unit-converter', '/src/pages/tools/UnitConverter.jsx', '/tools/unit-converter', 'Free Unit Converter Online – Length, Weight & Temperature | ToolsHub'],
+  ['/privacy', '/src/pages/Privacy.jsx', '/privacy'],
+  ['/terms', '/src/pages/Terms.jsx', '/terms'],
+  ['/about', '/src/pages/About.jsx', '/about'],
+  ['/contact', '/src/pages/Contact.jsx', '/contact'],
   ['/404', '/src/pages/NotFound.jsx', '/does-not-exist'],
 ];
 
 let failed = 0;
-for (const [name, modulePath, route] of pages) {
+for (const [name, modulePath, route, expectedTitle] of pages) {
   try {
     const { default: Page } = await vite.ssrLoadModule(modulePath);
+    const helmetContext = {};
     const html = renderToString(
       React.createElement(
-        StaticRouter,
-        { location: route },
-        React.createElement(Page)
+        HelmetProvider,
+        { context: helmetContext },
+        React.createElement(
+          StaticRouter,
+          { location: route },
+          React.createElement(Page)
+        )
       )
     );
     if (!html || html.length < 100) throw new Error('suspiciously small render output');
-    console.log(`  ✓ ${name} rendered (${html.length} chars)`);
+    const encodedTitle = expectedTitle?.replaceAll('&', '&amp;');
+    if (expectedTitle && !html.includes(expectedTitle) && !html.includes(encodedTitle)) {
+      throw new Error(`expected title was not rendered: ${expectedTitle}`);
+    }
+    console.log(`  ✓ ${name} rendered${expectedTitle ? ` with title "${expectedTitle}"` : ''} (${html.length} chars)`);
   } catch (err) {
     failed += 1;
     process.exitCode = 1;
@@ -65,9 +79,13 @@ try {
   const { default: Home } = await vite.ssrLoadModule('/src/pages/Home.jsx');
   const html = renderToString(
     React.createElement(
-      StaticRouter,
-      { location: '/' },
-      React.createElement(Layout, null, React.createElement(Home))
+      HelmetProvider,
+      null,
+      React.createElement(
+        StaticRouter,
+        { location: '/' },
+        React.createElement(Layout, null, React.createElement(Home))
+      )
     )
   );
   if (!html.includes('ToolsHub') || !html.includes('Image Compressor')) {
